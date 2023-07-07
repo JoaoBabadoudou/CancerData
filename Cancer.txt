@@ -1,0 +1,4 @@
+570 cellules cancéreuses et 30 caractéristiques pour déterminer si les cellules cancéreuses dans nos données sont
+ bénignes ou malignes
+
+Nos données sur le cancer contiennent 2 types de cancers: 1. cancer bénin (B) et 2. cancer malin (M)

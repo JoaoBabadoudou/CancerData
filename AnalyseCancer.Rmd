@@ -1,0 +1,95 @@
+---
+title: "Analyse des types de cellules cancéreuses"
+author: "Joao BABADOUDOU"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Definition de l'objectif
+
+### Objectif
+
+Ce docucent est réalisé dans le cadre de l'apprentissage des techniques de machine learning. Il permetra d'appliquer une démarche scientifique bien précise à un jeu de donnnées biologiques. En effet , il s'agira de concevoir un modèle capable de prédire le type de cancer des cellules atteintes dans 95% des cas. Notre jeu de données contient 570 cellules cancéreuses et 30 caractéristiques pour déterminer si les cellules cancéreuses dans nos données sont bénignes ou malignes.
+
+### Métrique
+
+Pour l'évaluation des performances du modèle, nous allons utiliser en plus de l'**accuracy** la précision et la sensibilité. On cherchera donc une précision de 80 et une sensibilité de
+
+## Analyse et exploration des données
+
+Chargeons les library Python utilent pour les analyses et la base de données à exploiter
+
+```{python}
+import pandas as pd
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+```
+
+```{python}
+data= pd.read_csv("D:/R_projet/BioR/Cancer_Data.csv")
+data.head()
+df=data.copy()
+```
+
+### Objectif
+
+-   Comprendre du mieux possible les données
+
+-   Développer une première stratégie de modelisation
+
+### Checklist de base
+
+#### **Analyse de la forme**
+
+-   **Variable target :** diagnosis
+
+-   **Lignes et colonnes :**
+
+    ```{python}
+    df.shape
+    ```
+
+    569 lignes et 33 colonnes
+
+-   **Types de variables :**
+
+    ```{python}
+
+    df.dtypes
+    ```
+
+-   **Analyse des valeurs manquantes :**
+
+    ```{python}
+    df.isna().sum()
+    df=df.drop('Unnamed: 32',axis=1)
+    df=df.drop('id',axis=1)
+    ```
+
+Comme on peut le constater notre dataset ne contient aucune valeur manquante.
+
+#### Analyse de fond
+
+-   **Visualisation de la target**
+
+    On va commencer par compter le nombre de cellule benignes et le nombre de cellule maligne
+
+    ```{python}
+    df['diagnosis'].value_counts(normalize=True)
+    ```
+
+On a donc 62,7% de cellules cancereuses benignes et 37.2% de malignes. Le fait que le nombre de cas ne soit pas equilibrer confirme le choix de nos metriques.
+
+-   **Histogramme des variables continues :**
+
+    ```{python}
+    for col in df.select_dtypes('float'):
+      plt.figure()
+      sns.displot(df[col])
+      plt.show()
+    ```
