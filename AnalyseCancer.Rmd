@@ -9,11 +9,11 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Definition de l'objectif
+## Définition de l'objectif
 
 ### Objectif
 
-Ce docucent est réalisé dans le cadre de l'apprentissage des techniques de machine learning. Il permetra d'appliquer une démarche scientifique bien précise à un jeu de donnnées biologiques. En effet , il s'agira de concevoir un modèle capable de prédire le type de cancer des cellules atteintes dans 95% des cas. Notre jeu de données contient 570 cellules cancéreuses et 30 caractéristiques pour déterminer si les cellules cancéreuses dans nos données sont bénignes ou malignes.
+Ce document est réalisé dans le cadre de l'apprentissage des techniques de machine learning. Il permettra d'appliquer une démarche scientifique bien précise à un jeu de données biologiques. En effet , il s'agira de concevoir un modèle capable de prédire le type de cancer des cellules atteintes dans 95% des cas. Notre jeu de données contient 570 cellules cancéreuses et 30 caractéristiques pour déterminer si les cellules cancéreuses dans nos données sont bénignes ou malignes.
 
 ### Métrique
 
@@ -21,7 +21,7 @@ Pour l'évaluation des performances du modèle, nous allons utiliser en plus de 
 
 ## Analyse et exploration des données
 
-Chargeons les library Python utilent pour les analyses et la base de données à exploiter
+Chargeons les libraries Python utiles pour les analyses et la base de données à exploiter
 
 ```{python}
 import pandas as pd
@@ -40,11 +40,11 @@ df=data.copy()
 
 -   Comprendre du mieux possible les données
 
--   Développer une première stratégie de modelisation
+-   Développer une première stratégie de modélisation
 
-### Checklist de base
+### 
 
-#### **Analyse de la forme**
+### **Analyse de la forme**
 
 -   **Variable target :** diagnosis
 
@@ -73,17 +73,17 @@ df=data.copy()
 
 Comme on peut le constater notre dataset ne contient aucune valeur manquante.
 
-#### Analyse de fond
+### Analyse de fond
 
 -   **Visualisation de la target**
 
-    On va commencer par compter le nombre de cellule benignes et le nombre de cellule maligne
+    On va commencer par compter le nombre de cellule bénignes et le nombre de cellule maligne
 
     ```{python}
     df['diagnosis'].value_counts(normalize=True)
     ```
 
-On a donc 62,7% de cellules cancereuses benignes et 37.2% de malignes. Le fait que le nombre de cas ne soit pas equilibrer confirme le choix de nos metriques.
+On a donc 62,7% de cellules cancéreuses bénignes et 37.2% de malignes. Le fait que le nombre de cas ne soit pas équilibrer confirme le choix de nos métriques.
 
 -   **Histogramme des variables continues :**
 
@@ -93,3 +93,22 @@ On a donc 62,7% de cellules cancereuses benignes et 37.2% de malignes. Le fait q
       sns.displot(df[col])
       plt.show()
     ```
+
+En tenant compte de la forme de nos histogramme, on peut dire que la plupart de nos variables ont une distribution asymétrique à gauche. Il convient donc de **standardiser** nos données.
+
+### Relation Target/Variables
+
+**Création de sous-ensembles B et M**
+
+```{python}
+M_df=df[df['diagnosis']== 'M']
+B_df=df[df['diagnosis']=='B']
+```
+
+```{python}
+M_df.head()
+```
+
+```{python}
+df
+```
