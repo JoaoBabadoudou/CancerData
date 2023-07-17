@@ -112,3 +112,15 @@ M_df.head()
 ```{python}
 df
 ```
+
+## Pre-Traitement des donnees
+
+Dans cette partie, il s'agira de séparer nos données en données d\'entraînement et de test.
+
+```{python}
+from sklearn.model_selection import train_test_split 
+df_train, df_test = train_test_split(df, test_size=0.3, 
+random_state=22)
+```
+
+Normalisons les données a l'aide de StandardScaler de Scikit Learn
